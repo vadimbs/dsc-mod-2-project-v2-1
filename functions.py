@@ -1,10 +1,22 @@
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-
+import seaborn as sns
+import statsmodels.api as sm
+import statsmodels.stats.api as sms
+import statsmodels.formula.api as smf
+from statsmodels.formula.api import ols
+import scipy.stats as stats
+from sklearn.model_selection import KFold
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split
+import pickle
 import warnings
 warnings.filterwarnings('ignore')
+plt.style.use('ggplot')
+
 
 
 def print_reduce_perc(old_df,new_df):
@@ -15,7 +27,6 @@ def print_reduce_perc(old_df,new_df):
     new_df_len = len(new_df)
     reduce = round(100 - (new_df_len * 100 / old_df_len), 2)
     display(f'Dataframe length -  before: {old_df_len}, after: {new_df_len}. Size reduction: {reduce}%')
-    
     
     
 
@@ -36,8 +47,6 @@ def print_scatter(df,x_cols,y):
             ax.set_xticklabels([])
             df.plot(kind='scatter', x=xcol, y=y, ax=ax)
 
-            
-            
 
 
 def print_hist(df, bins='auto'):
@@ -50,39 +59,7 @@ def print_hist(df, bins='auto'):
     df.hist(ax = ax, bins=bins);
 
     
-
-# from sklearn.linear_model import LinearRegression
-# from sklearn.model_selection import cross_val_score
-# from sklearn.model_selection import KFold
-
-# def print_cross_val_score(df,continious,categorical,outcome):
-#     """
     
-#     """
-    
-#     df_ohe = pd.get_dummies(df[categorical], columns=categorical, drop_first=True)
-#     preprocessed = pd.concat([df[continious], df_ohe], axis=1)
-
-#     X = preprocessed.drop(outcome, axis=1)
-#     y = preprocessed[outcome]
-
-#     cross_validation = KFold(n_splits=10, shuffle=True, random_state=1)
-
-#     regression = LinearRegression()
-#     baseline = np.mean(cross_val_score(regression, X, y, cv=cross_validation, n_jobs=-1))
-#     print(baseline)
-
-    
-        
-import pandas as pd
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
-import statsmodels.stats.api as sms
-import statsmodels.formula.api as smf
-from statsmodels.formula.api import ols
-import scipy.stats as stats
-plt.style.use('ggplot')
-
 def print_linear_model_summary(df,x_cols,y):
     """
     df -- dataframe
@@ -101,10 +78,7 @@ def print_linear_model_summary(df,x_cols,y):
     fig = sm.graphics.plot_regress_exog(model, y, fig=fig)
     plt.show()
     
-    
-    
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LinearRegression
+
 
 def print_RFE(X, y, n=3):
     """
@@ -119,8 +93,6 @@ def print_RFE(X, y, n=3):
     display(X.loc[:,selector.support_].columns)
     
     
-    
-import statsmodels.api as sm
 
 def stepwise_selection(X, y, 
                        initial_list=[], 
