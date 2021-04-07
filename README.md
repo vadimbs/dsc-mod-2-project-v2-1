@@ -1,13 +1,4 @@
-
-# Module 2 Final Project
-
-
-# Files:
-1. student.ipynb - main file
-2. presentation.pdf - quick non-technical presentation
-
-
-## student.ipynb contents
+# Contents
 * #### EDA
   * Import and explore data
   * Initial data visualization
@@ -25,8 +16,8 @@
   * Linear regression using Statsmodels
   * Cross validation
   * Linear regression using scikit-learn
+  * Check for normality
+  * Check for heteroscedascity
+  * Check for multicollinearity
   * Visualizing prediction accuracy
 * #### Recommendations
-
-
-
