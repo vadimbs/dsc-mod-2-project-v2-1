@@ -155,11 +155,12 @@ def log_norm(df,cols):
     cols --- columns to process (continious data)
     """
     
+    cur_df = df.copy()
     for col in cols: 
-        col_log = np.log(df[col])    
-        df[col] = (col_log - col_log.mean()) / col_log.std()
+        col_log = np.log(cur_df[col])    
+        cur_df[col] = (col_log - col_log.mean()) / col_log.std()
         
-    return df
+    return cur_df
 
 
 
@@ -170,11 +171,11 @@ def normalize(df,cols):
     df --- Dataframe
     cols --- columns to process (continious data)
     """
-
+    cur_df = df.copy()
     for col in cols:    
-        df[col] = (df[col] - df[col].mean()) / df[col].std()
+        cur_df[col] = (cur_df[col] - cur_df[col].mean()) / cur_df[col].std()
         
-    return df
+    return cur_df
 
 
 
